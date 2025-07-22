@@ -2,7 +2,7 @@ import sys
 from pathlib import Path
 from recipebuilder.downloader import create_output_dirs, download_tiktok_video
 from recipebuilder.metadata import get_description_from_info_file
-from recipebuilder.audio import extract_audio, transcribe_audio_locally
+from recipebuilder.audio import transcribe_audio_locally
 from recipebuilder.recipe import bundle_recipe_info
 
 def process_video(url: str):
@@ -11,7 +11,7 @@ def process_video(url: str):
         sys.exit(1)
 
     url = sys.argv[1]
-    print(f"🔗 Downloading TikTok video and metadata from:\n{url}")
+    print(f"🔗 Downloading TikTok audio and metadata from:\n{url}")
 
     video_id = url.rstrip("/").split("/")[-1]
     output_dir = create_output_dirs(video_id)
@@ -30,8 +30,8 @@ def process_video(url: str):
     audio_path = output_dir / f"{video_id}.wav"
     transcript_path = output_dir / f"{video_id}_transcript.txt"
 
-    print("🎧 Extracting audio...")
-    extract_audio(video_path, audio_path)
+    # print("🎧 Extracting audio...")
+    # extract_audio(video_path, audio_path)
 
     print("🗣️ Transcribing audio with Whisper (local)...")
     transcript = transcribe_audio_locally(audio_path, transcript_path)

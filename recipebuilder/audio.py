@@ -2,10 +2,10 @@ from moviepy import VideoFileClip
 import whisper
 
 
-def extract_audio(video_path, audio_path):
-    clip = VideoFileClip(video_path)
-    clip.audio.write_audiofile(audio_path)
-    clip.close()
+# def extract_audio(url, audio_path):
+#     clip = VideoFileClip(video_path)
+#     clip.audio.write_audiofile(audio_path)
+#     clip.close()
 
 def transcribe_audio_locally(audio_path, transcript_path, model_size="base"):
     model = whisper.load_model(model_size)
