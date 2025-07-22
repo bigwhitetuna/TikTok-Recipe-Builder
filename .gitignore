@@ -1,13 +1,36 @@
-# Python
-__pycache__/
-*.pyc
+# # Python
+# __pycache__/
+# *.pyc
 
-# Environments
-.venv/
-.direnv/
-.python-version
+# # Environments
+# .venv/
+# .direnv/
+# .python-version
+# .env
+# .envrc
+
+# # Downloads & outputs
+# downloads/
+
+# Root-level ignores
 .env
 .envrc
+*.pyc
+__pycache__/
+.vscode/
+*.log
 
-# Downloads & outputs
-downloads/
+# Python API ignores
+/api/.env
+/api/.direnv
+/api/.envrc
+/api/*.pyc
+/api/downloads
+/api/__pycache__/
+/api/.python-version
+
+# Python and Ruby standard
+*.egg-info/
+*.DS_Store
+*.swp
+

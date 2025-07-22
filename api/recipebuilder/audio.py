@@ -12,8 +12,12 @@ def transcribe_audio_locally(audio_path, transcript_path, model_size="base"):
     result = model.transcribe(str(audio_path))
     transcript = result["text"]
 
-    with open(transcript_path, "w", encoding="utf-8") as f:
-        f.write(transcript)
+    try:
+        with open(transcript_path, "w", encoding="utf-8") as f:
+            f.write(transcript)
 
-    print(f"✅ Transcript saved to {transcript_path}")
-    return transcript
+        print(f"✅ Transcript saved to {transcript_path}")
+        return transcript
+    except Exception as e:
+        print(f"❌ Error saving transcript: {e}")
+        return None
