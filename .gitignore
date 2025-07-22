@@ -1,4 +1,13 @@
-.envrc
+# Python
+__pycache__/
+*.pyc
+
+# Environments
+.venv/
 .direnv/
 .python-version
-downloads
+.env
+.envrc
+
+# Downloads & outputs
+downloads/
