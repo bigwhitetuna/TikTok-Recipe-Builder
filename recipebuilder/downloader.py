@@ -1,7 +1,7 @@
 import yt_dlp
 from pathlib import Path
 
-def download_tiktok_video(url, video_id, output_dir):
+def download_tiktok_audio(url, video_id, output_dir):
     ydl_opts = {
         "format": "bestaudio/best",
         "outtmpl": str(output_dir / f"{video_id}.%(ext)s"),
@@ -18,6 +18,7 @@ def download_tiktok_video(url, video_id, output_dir):
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         info = ydl.extract_info(url, download=True)
         return info
+        
 
 def create_output_dirs(video_id):
     base = Path("downloads") / video_id / "assets"

@@ -1,6 +1,6 @@
 import sys
 from pathlib import Path
-from recipebuilder.downloader import create_output_dirs, download_tiktok_video
+from recipebuilder.downloader import create_output_dirs, download_tiktok_audio
 from recipebuilder.metadata import get_description_from_info_file
 from recipebuilder.audio import transcribe_audio_locally
 from recipebuilder.recipe import bundle_recipe_info
@@ -15,18 +15,19 @@ def process_video(url: str):
 
     video_id = url.rstrip("/").split("/")[-1]
     output_dir = create_output_dirs(video_id)
-    info = download_tiktok_video(url, video_id, output_dir)
+    info = download_tiktok_audio(url, video_id, output_dir)
 
     info_file = output_dir / f"{video_id}.info.json"
     if info_file.exists():
-        desc, title = get_description_from_info_file(info_file)
+        # desc, title = get_description_from_info_file(info_file)
+        desc, title = info.get("description", ""), info.get("title", "")
         print(f"\n📝 Title: {title}\n")
         print(f"\n📋 Description:\n{desc}\n")
     else:
         print(f"❌ Metadata file not found.")
         sys.exit(1)
 
-    video_path = output_dir / f"{video_id}.mp4"
+    # video_path = output_dir / f"{video_id}.mp4"
     audio_path = output_dir / f"{video_id}.wav"
     transcript_path = output_dir / f"{video_id}_transcript.txt"
 
@@ -36,4 +37,4 @@ def process_video(url: str):
     print("🗣️ Transcribing audio with Whisper (local)...")
     transcript = transcribe_audio_locally(audio_path, transcript_path)
 
-    bundle_recipe_info(video_id, title, desc, transcript)
+    bundle_recipe_info(video_id, title, desc, transcript, url)
